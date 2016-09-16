@@ -120,8 +120,7 @@ class ViewController: UIViewController {
                 mobileText.placeholder = " Enter your mobile number"
             })
 
-            
-            
+
             
             
             
@@ -146,7 +145,40 @@ class ViewController: UIViewController {
     func OnSignUPFuction(sender: UIButton){
     self.navigationController?.pushViewController(SignUPViewController(), animated: true)
     print("Success")
-    
+    // validation field
+        if (NameText.text == ""){
+            let alert = UIAlertController(title: "Invalid", message: "Name Required! ", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }else if(addressText.text == ""){
+            let alert = UIAlertController(title: "Invalid", message: "Address Required! ", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+        }else if(mobileText.text == ""){
+            let alert = UIAlertController(title: "Invalid", message: "Mobile Required! ", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            
+        }else{
+            let alert = UIAlertController(title: "Conguratulations!", message: "Successfully Login! ", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+
+        
+        
+        }
+        
 
     }
     
