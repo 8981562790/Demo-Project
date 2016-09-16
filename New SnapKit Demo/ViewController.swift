@@ -9,8 +9,11 @@
 import UIKit
 import SnapKit
 import Foundation
+var m = ""
 
 class ViewController: UIViewController {
+    
+ 
     lazy var box = UIView()
     var labal1 = UILabel()
     var namleLable = UILabel()
@@ -19,23 +22,26 @@ class ViewController: UIViewController {
     var addressText = UITextField()
     var mobileLabel = UILabel()
     var mobileText = UITextField()
+    var emailLabel = UILabel()
+    var emailTextField = UITextField()
     var SignUpButton = UIButton()
+    
    
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         box.backgroundColor = UIColor.orangeColor()
-        labal1.backgroundColor = UIColor.lightGrayColor()
-        namleLable.backgroundColor = UIColor.whiteColor()
+        labal1.backgroundColor = UIColor.orangeColor()
+        namleLable.backgroundColor = UIColor.lightGrayColor()
         NameText .backgroundColor = UIColor.whiteColor()
-        addressLabel.backgroundColor = UIColor.whiteColor()
+        addressLabel.backgroundColor = UIColor.lightGrayColor()
         addressText .backgroundColor = UIColor.whiteColor()
         SignUpButton.backgroundColor = UIColor.lightGrayColor()
-        mobileLabel.backgroundColor = UIColor.whiteColor()
+        mobileLabel.backgroundColor = UIColor.lightGrayColor()
         mobileText.backgroundColor = UIColor.whiteColor()
-        
-
+        emailLabel.backgroundColor = UIColor.lightGrayColor()
+        emailTextField.backgroundColor = UIColor.whiteColor()
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -51,7 +57,7 @@ class ViewController: UIViewController {
                 make.height.equalTo(44)
                 make.left.equalTo(self.view).offset(20)
                 make.right.equalTo(self.view).offset(-20)
-                labal1.text = String(" Registration Form");
+                labal1.text = String(" Sign-UP");
                 labal1.textAlignment = NSTextAlignment.Center
             
             })
@@ -64,7 +70,7 @@ class ViewController: UIViewController {
                 make.height.equalTo(40)
                 make.left.equalTo(self.view).offset(20)
                 make.right.equalTo(self.view).offset(-20)
-                namleLable.text = String(" Name:")
+                namleLable.text = String(" Name")
                 namleLable.textAlignment = NSTextAlignment.Left
             })
             
@@ -85,7 +91,7 @@ class ViewController: UIViewController {
                 make.height.equalTo(40)
                 make.left.equalTo(self.view).offset(20)
                 make.right.equalTo(self.view).offset(-20)
-                addressLabel.text = String(" Address:")
+                addressLabel.text = String(" Address")
                 addressLabel.textAlignment = NSTextAlignment.Left
             })
             
@@ -106,7 +112,7 @@ class ViewController: UIViewController {
                 make.height.equalTo(40)
                 make.left.equalTo(self.view).offset(20)
                 make.right.equalTo(-20)
-                mobileLabel.text = String(" Mobile:")
+                mobileLabel.text = String(" Mobile")
                 mobileLabel.textAlignment = NSTextAlignment.Left
             })
             
@@ -118,16 +124,34 @@ class ViewController: UIViewController {
                 make.left.equalTo(self.view).offset(20)
                 make.right.equalTo(-20)
                 mobileText.placeholder = " Enter your mobile number"
+                
             })
 
+            // email label
+            self.view.addSubview(emailLabel)
+            emailLabel.snp_makeConstraints(closure: { (make) in
+                make.top.equalTo(self.mobileText.snp_bottom).offset(10)
+                make.height.equalTo(40)
+                make.left.equalTo(self.view).offset(20)
+                make.right.equalTo(-20)
+                emailLabel.text = String(" Email")
+                emailLabel.textAlignment = NSTextAlignment.Left
+            })
+            // email TextField
+            self.view.addSubview(emailTextField)
+            emailTextField.snp_makeConstraints(closure: { (make) in
+                make.top.equalTo(self.emailLabel.snp_bottom).offset(10)
+                make.height.equalTo(40)
+                make.left.equalTo(self.view).offset(20)
+                make.right.equalTo(-20)
+                emailTextField.placeholder = " Please Enter Valid Email Id"
+            })
 
-            
-            
             
             // for submit button
             self.view.addSubview(SignUpButton)
                SignUpButton.snp_makeConstraints(closure: { (make) in
-                make.top.equalTo(self.mobileText.snp_bottom).offset(10)
+                make.top.equalTo(self.emailTextField.snp_bottom).offset(10)
                 make.height.equalTo(40)
                 make.left.equalTo(self.view).offset(150)
                 make.right.equalTo(-150)
@@ -139,21 +163,45 @@ class ViewController: UIViewController {
         
         
     }
-   
-  
+    func validate(m: String) -> Bool {
+        
+       // let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"    its true when user input same format
+        let PHONE_REGEX = "^\\d{10}"
+        
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        
+        let result =  phoneTest.evaluateWithObject(m)
+        
+        return result
+        
+    }
+    func isValidEmail(testStr:String) -> Bool {
+        
+        print("validate emilId: \(testStr)")
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        
+        let result = emailTest.evaluateWithObject(testStr)
+        
+        return result
+    }
    
     func OnSignUPFuction(sender: UIButton){
     self.navigationController?.pushViewController(SignUPViewController(), animated: true)
     print("Success")
-    // validation field
+        
+          m = mobileText.text!
+        // validation field
         if (NameText.text == ""){
-            let alert = UIAlertController(title: "Invalid", message: "Name Required! ", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Blank", message: "Name Required! ", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
             }))
             self.presentViewController(alert, animated: true, completion: nil)
         }else if(addressText.text == ""){
-            let alert = UIAlertController(title: "Invalid", message: "Address Required! ", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Blank", message: "Address Required! ", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
             }))
@@ -161,13 +209,36 @@ class ViewController: UIViewController {
         
         
         }else if(mobileText.text == ""){
-            let alert = UIAlertController(title: "Invalid", message: "Mobile Required! ", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Blank", message: "Mobile Required! ", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
             }))
             self.presentViewController(alert, animated: true, completion: nil)
             
             
+        }else if (validate(mobileText.text!)) == false  {
+            print((validate(mobileText.text!)))
+            let alert = UIAlertController(title: "Invalid Mobile", message: "Please Type Valid Mobile Number! ", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }else if(emailTextField.text == ""){
+            let alert = UIAlertController(title: "Blank", message: "Email Required! ", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            
+        }else if (isValidEmail(emailTextField.text!)) == false{
+            let alert = UIAlertController(title: "Invalid", message: "Please type valid Email! ", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: {(action:UIAlertAction!) in print("")
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        
+        
         }else{
             let alert = UIAlertController(title: "Conguratulations!", message: "Successfully Login! ", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -175,13 +246,14 @@ class ViewController: UIViewController {
             }))
             self.presentViewController(alert, animated: true, completion: nil)
 
-        
-        
         }
         
-
+        
+        
+        
     }
     
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
