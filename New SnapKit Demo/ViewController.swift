@@ -31,18 +31,55 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        box.backgroundColor = UIColor.orangeColor()
-        labal1.backgroundColor = UIColor.orangeColor()
-        namleLable.backgroundColor = UIColor.lightGrayColor()
+        box.backgroundColor = UIColor.cyanColor()
+        labal1.backgroundColor = UIColor.cyanColor()
+       
+        namleLable.layer.borderWidth = 2.0
+        namleLable.layer.cornerRadius = 8
+        namleLable.backgroundColor = UIColor.whiteColor()
+        namleLable.layer.masksToBounds = true
+       
         NameText .backgroundColor = UIColor.whiteColor()
-        addressLabel.backgroundColor = UIColor.lightGrayColor()
-        addressText .backgroundColor = UIColor.whiteColor()
-        SignUpButton.backgroundColor = UIColor.lightGrayColor()
-        mobileLabel.backgroundColor = UIColor.lightGrayColor()
-        mobileText.backgroundColor = UIColor.whiteColor()
-        emailLabel.backgroundColor = UIColor.lightGrayColor()
-        emailTextField.backgroundColor = UIColor.whiteColor()
+        NameText.layer.cornerRadius = 8
+        NameText.layer.masksToBounds = true
         
+        
+        addressLabel.layer.borderWidth = 2.0
+        addressLabel.layer.cornerRadius = 8
+        addressLabel.backgroundColor = UIColor.whiteColor()
+        addressLabel.layer.masksToBounds = true
+
+        
+        addressText .backgroundColor = UIColor.whiteColor()
+        addressText.layer.cornerRadius = 8
+        addressText.layer.masksToBounds = true
+        
+        
+        
+       
+        mobileLabel.layer.borderWidth = 2.0
+        mobileLabel.layer.cornerRadius = 8
+        mobileLabel.backgroundColor = UIColor.whiteColor()
+        mobileLabel.layer.masksToBounds = true
+
+        
+        mobileText.backgroundColor = UIColor.whiteColor()
+        mobileText.layer.cornerRadius = 8
+        mobileText.layer.masksToBounds = true
+        
+        emailLabel.layer.borderWidth = 2.0
+        emailLabel.layer.cornerRadius = 8
+        emailLabel.backgroundColor = UIColor.whiteColor()
+        emailLabel.layer.masksToBounds = true
+        
+        
+        emailTextField.backgroundColor = UIColor.whiteColor()
+        emailTextField.layer.cornerRadius = 8
+        emailTextField.layer.masksToBounds = true
+        
+        SignUpButton.layer.borderWidth = 3.0
+        SignUpButton.backgroundColor = UIColor.orangeColor()
+        SignUpButton.layer.cornerRadius = 15
         
         // Do any additional setup after loading the view, typically from a nib.
         self.view.addSubview(box)
